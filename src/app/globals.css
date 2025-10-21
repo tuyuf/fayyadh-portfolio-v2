@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-accent: #111111;
+  --font-heading: var(--font-soria);
+  --font-body: var(--font-manrope);
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+:root {
+  --font-heading: "Soria", serif;
+
+}
+
+h2 {
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+@font-face {
+  font-family: "Soria";
+  src: url("/Soria-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

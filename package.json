@@ -1,0 +1,35 @@
+{
+  "name": "fayyadh-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3030",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.86.3",
+    "@react-three/fiber": "^8.15.13",
+    "@react-three/rapier": "^1.1.0",
+    "autoprefixer": "^10.4.19",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "fflate": "^0.8.2",
+    "framer-motion": "^10.16.4",
+    "gsap": "^3.13.0",
+    "lucide-react": "^0.546.0",
+    "meshline": "^3.3.1",
+    "motion": "^10.16.4",
+    "next": "15.0.0",
+    "postcss": "^8.4.41",
+    "postprocessing": "^6.37.8",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^5.4.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.13",
+    "tailwindcss-animate": "^1.0.7",
+    "three": "^0.180.0",
+    "three-stdlib": "^2.36.0"
+  }
+}

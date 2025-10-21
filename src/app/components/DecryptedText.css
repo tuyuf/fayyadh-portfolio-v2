@@ -1,0 +1,11 @@
+.encrypted {
+  opacity: 0.5;
+  filter: blur(1px);
+  transition: all 0.3s ease;
+}
+
+.revealed {
+  opacity: 1;
+  filter: none;
+  transition: all 0.3s ease;
+}
