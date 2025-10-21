@@ -31,7 +31,7 @@ export default function Hero() {
           className="leading-[1.1]"
         >
           <BlurText
-            text="Design that moves with quiet intention."
+            text="Quietly crafting visuals that resonate."
             delay={120}
             animateBy="words"
             direction="top"
@@ -39,13 +39,6 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* === buat kata terakhir italic === */}
-        <style jsx global>{`
-          /* Ambil span terakhir dalam kalimat hero, ubah jadi italic */
-          #hero .revealed span:last-child {
-            font-style: italic !important;
-          }
-        `}</style>
 
         {/* === Subheading === */}
         <motion.div
@@ -55,7 +48,7 @@ export default function Hero() {
           className="mt-6"
         >
           <BlurText
-            text="A practice of clarity and rhythm — where every pixel feels deliberate."
+            text="Design and photography shaped by clarity and intent.."
             delay={180}
             animateBy="words"
             direction="bottom"
@@ -70,8 +63,8 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.8 }}
           className="text-[0.95rem] text-gray-600 font-[var(--font-body)] leading-relaxed max-w-md mx-auto mb-12"
         >
-          Crafted slowly, with balance and care — 
-          <span className="italic"> minimal, but never empty.</span>
+          Every detail considered,
+          <span className="italic"> nothing accidental.</span>
         </motion.p>
 
         {/* === Button === */}

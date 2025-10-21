@@ -42,21 +42,18 @@ export default function About() {
             className="text-gray-700 text-[1.15rem] md:text-[1.25rem] leading-relaxed space-y-6"
           >
             <p>
-              I enjoy working in spaces where ideas have room to breathe —
-              where clarity comes from focus, and every decision is made with
-              intent. Collaboration matters to me, but so does stillness — the
-              quiet moments where design begins to take shape.
+              I’m Fayyadh — a designer and photographer focused on creating clear, intentional, and human-centered visuals. 
+              My work blends structure and creativity, aiming to make every interaction feel natural and meaningful.
             </p>
             <p>
-              My process is rooted in observation and refinement. I explore,
-              simplify, and polish until everything feels natural and balanced.
-              Whether it’s a visual identity, an interface, or a photograph, I
-              aim to create work that feels honest and human.
+               I value process over speed, clarity over noise, and collaboration that respects detail. 
+               Whether it’s a visual identity, a web layout, or a single frame, I aim to craft something that simply feels right.
             </p>
             <p>
-              This portfolio reflects that mindset — thoughtful, minimal, and
-              made with care for every detail that quietly brings the whole
-              together.
+              This portfolio is a reflection of that mindset —  
+              thoughtful, minimal, and quietly deliberate.  
+              Every detail here was made with care,  
+              stitched together to form something simple, but whole.
             </p>
           </motion.div>
 
@@ -84,7 +81,7 @@ export default function About() {
             />
           </motion.div>
         </div>
-        
+
       </div>
     </section>
   );

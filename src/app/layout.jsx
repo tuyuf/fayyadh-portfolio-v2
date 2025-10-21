@@ -1,6 +1,7 @@
 import "./globals.css";
 import localFont from "next/font/local";
 import { Manrope } from "next/font/google";
+import { icons } from "lucide-react";
 
 const soria = localFont({
   src: "./fonts/Soria-Regular.ttf",
@@ -16,6 +17,9 @@ const manrope = Manrope({
 export const metadata = {
   title: "interactwithf",
   description: "Simple · Thoughtful · Precise",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
