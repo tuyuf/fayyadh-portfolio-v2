@@ -48,7 +48,7 @@ export default function Hero() {
           className="mt-6"
         >
           <BlurText
-            text="Design and photography shaped by clarity and intent.."
+            text="Design and photography shaped by clarity and intent."
             delay={180}
             animateBy="words"
             direction="bottom"
