@@ -18,7 +18,7 @@ export const metadata = {
   title: "interactwithf",
   description: "Simple · Thoughtful · Precise",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/public/favicon.svg",
   },
 };
 

@@ -15,9 +15,10 @@ export default function Home() {
 
   // Splash screen delay
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000); // tampil 3 detik
-    return () => clearTimeout(timer);
+  const timer = setTimeout(() => setIsLoading(false), 5000);
+  return () => clearTimeout(timer);
   }, []);
+
 
   const navItems = [
   {
