@@ -31,3 +31,17 @@ h2 {
   font-weight: normal;
   font-style: normal;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

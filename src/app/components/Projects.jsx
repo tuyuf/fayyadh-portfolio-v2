@@ -17,6 +17,9 @@ export default function Projects() {
         "/images/uiux3.webp",
         "/images/uiux4.webp",
         "/images/uiux5.webp",
+        "/images/uiux6.webp",
+        "/images/uiux7.webp",
+        "/images/uiux8.webp",
       ],
     },
     {
@@ -115,7 +118,7 @@ export default function Projects() {
                         repeat: Infinity,
                         repeatType: "loop",
                         ease: "linear",
-                        duration: 25,
+                        duration: 30,
                       }}
                     >
                       {[...item.slides, ...item.slides].map((src, idx) => (
