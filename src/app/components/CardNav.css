@@ -1,12 +1,10 @@
 .card-nav-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   position: absolute;
   top: 2em;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 800px;
   z-index: 99;
-  box-sizing: border-box;
 }
 
 /* Main nav background */
@@ -19,7 +17,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position:relative;
   overflow: hidden;
   will-change: height;
   transition: background-color 0.3s ease;
@@ -130,7 +128,7 @@
   height: 100%;
   flex: 1 1 0;
   min-width: 0;
-  border-radius: calc(0.75rem - 0.2rem);
+  /* border-radius: calc(0.75rem - 0.2rem); */
   position: relative;
   display: flex;
   flex-direction: column;

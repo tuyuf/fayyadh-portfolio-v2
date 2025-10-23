@@ -1,73 +1,65 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SplashScreen() {
-  const [displayText, setDisplayText] = useState("");
-  const fullText = "crafted in quiet motion"; // 💬 ubah ini sesuai tone kamu
-  const [done, setDone] = useState(false);
-  const [fadeToBlack, setFadeToBlack] = useState(false);
+  const greetings = [
+    "Hello",
+    "Hola",
+    "Bonjour",
+    "Ciao",
+    "こんにちは",
+    "안녕하세요",
+    "你好",
+    "Hallo",
+    "Salam",
+    "Halo",
+  ];
 
-  // Efek decrypt text
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState("intro"); // intro → fadeout
+
   useEffect(() => {
-    const chars = "!@#$%^&*()_+=-<>?/[]{}";
-    let iteration = 0;
     const interval = setInterval(() => {
-      setDisplayText(
-        fullText
-          .split("")
-          .map((char, i) =>
-            i < iteration ? fullText[i] : chars[Math.floor(Math.random() * chars.length)]
-          )
-          .join("")
-      );
-      if (iteration >= fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => setDone(true), 400);
-      }
-      iteration += 1 / 2.2;
-    }, 40);
-    return () => clearInterval(interval);
-  }, [fullText]);
+      setIndex((prev) => (prev + 1) % greetings.length);
+    }, 600);
 
-  // Setelah teks selesai, mulai transisi ke hitam
-  useEffect(() => {
-    if (done) {
-      setTimeout(() => setFadeToBlack(true), 500);
-    }
-  }, [done]);
+    // mulai fade out ke putih
+    const timeout = setTimeout(() => {
+      setPhase("fadeout");
+    }, 2500);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
-    <AnimatePresence>
-      {!fadeToBlack && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 flex items-end justify-start z-[9999]"
+    <motion.div
+      className="fixed inset-0 flex items-center justify-center text-white"
+      style={{ zIndex: 9999 }}
+      initial={{ backgroundColor: "#ffffffff", opacity: 1 }}
+      animate={
+        phase === "fadeout"
+          ? { opacity: 0, backgroundColor: "#000000ff" }
+          : { opacity: 1, backgroundColor: "#ffffffff" }
+      }
+      transition={{ duration: 1.5, ease: [0.65, 0, 0.35, 1] }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.h1
+          key={greetings[index]}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-[clamp(2rem,5vw,4rem)] font-[var(--font-heading)] font-normal text-black"
         >
-          {/* Background dari putih → hitam */}
-          <motion.div
-            animate={{
-              backgroundColor: fadeToBlack ? "#ffffffff" : "#ffffffff",
-            }}
-            transition={{ duration: 1.8, ease: "easeInOut" }}
-            className="absolute inset-0"
-          />
-
-          {/* Text decrypt */}
-          <motion.h1
-            className="relative z-10 font-[var(--font-heading)] text-[clamp(2rem,6vw,5rem)] tracking-tight italic p-10"
-            animate={{
-              color: fadeToBlack ? "#000000ff" : "#000000ff",
-            }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          >
-            {displayText}
-          </motion.h1>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          {greetings[index]}
+        </motion.h1>
+      </AnimatePresence>
+    </motion.div>
   );
 }
