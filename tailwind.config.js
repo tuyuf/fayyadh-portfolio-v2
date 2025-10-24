@@ -2,8 +2,8 @@
 module.exports = {
   darkMode: ["class", "class"], // ✅ aktifkan dark mode manual via class
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx,svg}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx,svg}",
   ],
   theme: {
   	extend: {
