@@ -27,7 +27,7 @@ export default function SplashScreen() {
     const timeout = setTimeout(() => {
       setPhase("fadeout");
       clearInterval(interval); // stop interval biar gak nabrak animasi fade
-    }, greetings.length * 600 + 500); // total semua + sedikit buffer
+    }, greetings.length * 600 + 600); // total semua + sedikit buffer
 
     return () => {
       clearInterval(interval);
