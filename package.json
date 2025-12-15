@@ -20,7 +20,7 @@
     "lucide-react": "^0.546.0",
     "meshline": "^3.3.1",
     "motion": "^10.16.4",
-    "next": "15.0.0",
+    "next": "15.0.7",
     "postcss": "^8.4.41",
     "postprocessing": "^6.37.8",
     "react": "18.2.0",
