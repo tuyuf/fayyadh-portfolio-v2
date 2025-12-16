@@ -1,124 +1,112 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import BlurText from "./BlurText"; // Menggunakan komponen yang sudah ada [cite: 132]
+import { motion } from "framer-motion";
+import Stack from "./Stack"; 
 
 export default function About() {
-  const containerRef = useRef(null);
-  
-  // Parallax effect simple untuk text
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const details = [
+    { label: "Role", value: "Designer & Dev" },
+    { label: "Based in", value: "Semarang, ID" },
+    { label: "Experience", value: "Not Enough😄" }, // Sesuai screenshot terakhir
+    { label: "Vibe", value: "Quiet & Minimal" },
+  ];
 
-  const yText = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const stackImages = [
+    "/images/1.webp",   
+    "/images/2.webp",   
+    "/images/3.webp",    
+  ];
 
   return (
     <section
       id="about"
-      ref={containerRef}
-      className="relative bg-[#fafafa] text-black w-full py-24 md:py-40 overflow-hidden"
+      className="relative bg-white text-black px-6 md:px-24 py-32 md:pb-48 overflow-visible border-t border-gray-100"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      {/* UPDATE: items-center agar vertikal center secara otomatis */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
         
-        {/* === HEADER SECTION === */}
-        <div className="mb-20 md:mb-32 text-center md:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative inline-block"
-          >
-            <h2 className="text-[clamp(3.5rem,8vw,7rem)] font-[var(--font-heading)] leading-[0.9] tracking-tight">
-              Behind the <br className="md:hidden" />
-              <span className="italic text-gray-400">pixels.</span>
-            </h2>
-            {/* Dekorasi kecil */}
-            <motion.span 
-              className="absolute -top-6 -right-8 text-sm font-[var(--font-body)] tracking-widest uppercase border border-black/20 rounded-full px-3 py-1 hidden md:block"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-              Est. 2025
-            </motion.span>
-          </motion.div>
-        </div>
-
-        {/* === CONTENT: STICKY LAYOUT === */}
-        <div className="flex flex-col md:flex-row gap-12 md:gap-24 relative">
-          
-          {/* --- LEFT: STICKY IMAGE --- */}
-          {/* Foto akan diam saat discroll sampai section selesai */}
-          <div className="md:w-5/12 h-fit md:sticky md:top-32 self-start">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              viewport={{ once: true }}
-              className="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl"
-            >
-              <Image
-                src="/images/pp.webp" // Pastikan path ini sesuai file kamu
-                alt="Fayyadh Portrait"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              
-              {/* Overlay Gradient Halus */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-            </motion.div>
-            
-            {/* Caption kecil di bawah foto */}
-            <motion.p 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-6 text-xs font-[var(--font-body)] text-gray-400 tracking-widest uppercase text-center md:text-left"
-            >
-              Based in Semarang, ID
-            </motion.p>
+        {/* === KIRI: CARD STACK === */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          // UPDATE: Hapus -mt-12, ganti jadi 'flex items-center'
+          // Tambahkan md:mt-8 kalau masih merasa kurang turun sedikit
+          className="w-full md:w-5/12 relative shrink-0 flex items-center justify-center md:mt-10 z-10"
+        >
+          <div className="w-[300px] h-[380px] md:w-[400px] md:h-[500px] relative transform rotate-[-2deg]">
+            <Stack
+              randomRotation={true} 
+              sensitivity={100}     
+              sendToBackOnClick={true}
+              autoSlide={true}         
+              autoSlideInterval={2500} 
+              cards={stackImages.map((src, i) => (
+                <div 
+                  key={i} 
+                  className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border-[6px] border-white select-none"
+                >
+                  <Image
+                    src={src}
+                    alt={`Fayyadh Visual ${i + 1}`}
+                    fill
+                    className="object-cover pointer-events-none"
+                  />
+                  <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+                </div>
+              ))}
+            />
           </div>
 
-          {/* --- RIGHT: SCROLLING NARRATIVE --- */}
-          <motion.div 
-            style={{ y: yText }}
-            className="md:w-7/12 flex flex-col gap-16 md:gap-24 pt-10 md:pt-0"
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute -bottom-16 left-1/2 -translate-x-1/2 text-[10px] font-mono text-gray-400 tracking-widest uppercase text-center whitespace-nowrap"
           >
-            {/* Thought Block 1 */}
-            <div className="group">
-              <h3 className="text-3xl font-[var(--font-heading)] mb-4 text-gray-300 group-hover:text-black transition-colors duration-300">
-                01. The Approach
-              </h3>
-              <p className="text-xl md:text-2xl leading-relaxed font-[var(--font-body)] text-gray-800">
-                I’m Fayyadh — a designer and photographer focused on creating clear, <span className="italic font-semibold">intentional</span>, and human-centered visuals. My work blends structure with creativity, ensuring every interaction feels natural.
-              </p>
-            </div>
+            (Tap to Shuffle)
+          </motion.p>
+        </motion.div>
 
-            {/* Thought Block 2 */}
-            <div className="group">
-              <h3 className="text-3xl font-[var(--font-heading)] mb-4 text-gray-300 group-hover:text-black transition-colors duration-300">
-                02. The Philosophy
-              </h3>
-              <p className="text-xl md:text-2xl leading-relaxed font-[var(--font-body)] text-gray-800">
-                I value <span className="border-b border-black pb-1">process over speed</span> and clarity over noise. Whether it’s a visual identity, a web layout, or a single frame, I aim to craft something that simply feels right—without shouting for attention.
-              </p>
-            </div>
 
-            {/* Thought Block 3 */}
-            <div className="group">
-              <h3 className="text-3xl font-[var(--font-heading)] mb-4 text-gray-300 group-hover:text-black transition-colors duration-300">
-                03. The Portfolio
-              </h3>
-              <p className="text-xl md:text-2xl leading-relaxed font-[var(--font-body)] text-gray-800">
-                This space is a reflection of that mindset. Thoughtful, minimal, and quietly deliberate. Every detail here was stitched together to form something simple, yet <span className="italic font-serif text-3xl align-middle">whole</span>.
-              </p>
-            </div>
+        {/* === KANAN: TEXT MANIFESTO === */}
+        <div className="w-full md:w-7/12 flex flex-col justify-center h-full">
+          
+          <motion.span 
+             initial={{ opacity: 0 }}
+             whileInView={{ opacity: 1 }}
+             className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-8 block"
+          >
+            (01) Who I Am
+          </motion.span>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-[clamp(2.5rem,5vw,4.5rem)] font-[var(--font-heading)] leading-[1.05] mb-16"
+          >
+            I craft digital experiences that feel <span className="italic text-gray-500">calm</span>, <span className="italic text-gray-500">purposeful</span>, and human.
+          </motion.h2>
+
+          <motion.div 
+            className="grid grid-cols-2 gap-y-10 gap-x-8 border-t border-gray-200 pt-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            {details.map((item, i) => (
+              <div key={i}>
+                <h4 className="text-xs font-mono text-gray-400 uppercase mb-3 tracking-wider">{item.label}</h4>
+                <p className="text-xl md:text-2xl font-[var(--font-heading)]">{item.value}</p>
+              </div>
+            ))}
           </motion.div>
+
         </div>
+
       </div>
     </section>
   );

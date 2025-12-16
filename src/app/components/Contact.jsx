@@ -56,7 +56,7 @@ export default function ContactFooter() {
               Instagram
             </a>
             <a
-              href="https://www.linkedin.com/in/fayyadh-muhammad-habibie"
+              href="https://www.linkedin.com/in/fayyadh-muhammad-habibie-b2534a305/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
