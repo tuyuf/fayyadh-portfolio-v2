@@ -31,7 +31,7 @@ const AutoScrollContainer = ({ children, className }) => {
       } else {
         container.scrollBy({ left: scrollAmount, behavior: "smooth" });
       }
-    }, 1000); // Durasi 1 detik
+    }, 3000); // Durasi 1 detik
 
     return () => clearInterval(interval);
   }, [isPaused]);
