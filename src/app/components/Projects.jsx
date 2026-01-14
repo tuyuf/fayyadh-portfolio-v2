@@ -102,6 +102,15 @@ export default function Projects() {
       slides: ["/images/uiux1.webp"], 
       items: [
         {
+          title: "Al Madeena Islamic School",
+          tech: "Next.js • PostgreSQL • Tailwind",
+          url: "https://almadeenaislamicschool.sch.id/",
+          description: "Portfolio site for Al Madeena Islamic School.",
+          embedUrl: "https://almadeenaislamicschool.sch.id/",
+          fallbackImage: "/images/uiux2.webp"
+        },
+
+        {
           title: "Reloved — Thrift E-Commerce",
           tech: "React • Supabase • Tailwind",
           url: "https://www.reloved.biz.id/",
@@ -109,14 +118,7 @@ export default function Projects() {
           embedUrl: "https://www.reloved.biz.id/",
           fallbackImage: "/images/uiux1.webp" 
         },
-        {
-          title: "Reswara Praptama",
-          tech: "Next.js • Sanity CMS • Tailwind",
-          url: "https://reswarapraptama.com",
-          description: "Portfolio site for Reswara Praptama.",
-          embedUrl: "https://reswarapraptama.com",
-          fallbackImage: "/images/uiux2.webp"
-        },
+        
         {
           title: "Portfolio V2",
           tech: "Next.js 15 • Framer Motion",
