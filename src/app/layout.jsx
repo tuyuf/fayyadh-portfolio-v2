@@ -9,6 +9,12 @@ const soria = localFont({
   display: "swap",
 });
 
+const harmond = localFont({
+  src: "./fonts/Harmond-SemiBoldCondensed.otf",
+  variable: "--font-harmond",
+  display: "swap",
+});
+
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
@@ -34,7 +40,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${soria.variable} bg-[var(--color-bg)] text-[var(--color-text)]`}
+        className={`${manrope.variable} ${soria.variable} ${harmond.variable} bg-[var(--color-bg)] text-[var(--color-text)]`}
       >
         {children}
       </body>

@@ -51,7 +51,7 @@ export default function Hero() {
             delay={120}
             animateBy="words"
             direction="top"
-            className="text-[clamp(3rem,7vw,5rem)] font-[var(--font-heading)] font-normal text-gray-900 leading-tight text-center"
+            className="text-[clamp(3rem,7vw,5rem)] font-heading font-normal text-gray-900 leading-tight text-center"
           />
         </motion.div>
 
@@ -67,7 +67,7 @@ export default function Hero() {
             delay={180}
             animateBy="words"
             direction="bottom"
-            className="text-lg md:text-xl font-[var(--font-heading)] font-light text-gray-700 leading-relaxed tracking-wide mb-10 max-w-2xl mx-auto"
+            className="text-lg md:text-xl font-heading font-light text-gray-700 leading-relaxed tracking-wide mb-10 max-w-2xl mx-auto"
           />
         </motion.div>
 

@@ -15,7 +15,7 @@ export default function ContactFooter() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-[clamp(2rem,4.5vw,3.5rem)] font-[var(--font-heading)] leading-[1.15] tracking-tight mb-6"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-heading leading-[1.15] tracking-tight mb-6"
           >
             Let’s build something <span className="italic text-gray-300">intentional</span>.
           </motion.h2>
@@ -77,7 +77,7 @@ export default function ContactFooter() {
 
       {/* === Footer Bottom === */}
       <div className="border-t border-gray-800 opacity-60 pt-8">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[0.8rem] text-gray-500 font-[var(--font-heading)] tracking-[0.12em] uppercase">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[0.8rem] text-gray-500 font-heading tracking-[0.12em] uppercase">
           <p>
             built by <span className="italic text-white">fayyadh muhammad habibie</span>
           </p>

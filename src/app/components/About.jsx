@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Stack from "./Stack"; 
+import Stack from "./Stack";
 
 export default function About() {
   const details = [
@@ -13,9 +13,9 @@ export default function About() {
   ];
 
   const stackImages = [
-    "/images/1.webp",   
-    "/images/2.webp",   
-    "/images/3.webp",    
+    "/images/1.webp",
+    "/images/2.webp",
+    "/images/3.webp",
   ];
 
   return (
@@ -25,7 +25,7 @@ export default function About() {
     >
       {/* UPDATE: items-center agar vertikal center secara otomatis */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
-        
+
         {/* === KIRI: CARD STACK === */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -38,14 +38,14 @@ export default function About() {
         >
           <div className="w-[300px] h-[380px] md:w-[400px] md:h-[500px] relative transform rotate-[-2deg]">
             <Stack
-              randomRotation={true} 
-              sensitivity={100}     
+              randomRotation={true}
+              sensitivity={100}
               sendToBackOnClick={true}
-              autoSlide={true}         
-              autoSlideInterval={2500} 
+              autoSlide={true}
+              autoSlideInterval={2500}
               cards={stackImages.map((src, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border-[6px] border-white select-none"
                 >
                   <Image
@@ -60,7 +60,7 @@ export default function About() {
             />
           </div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 1 }}
@@ -73,11 +73,11 @@ export default function About() {
 
         {/* === KANAN: TEXT MANIFESTO === */}
         <div className="w-full md:w-7/12 flex flex-col justify-center h-full">
-          
-          <motion.span 
-             initial={{ opacity: 0 }}
-             whileInView={{ opacity: 1 }}
-             className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-8 block"
+
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-8 block"
           >
             (01) Who I Am
           </motion.span>
@@ -86,12 +86,12 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-[clamp(2.5rem,5vw,4.5rem)] font-[var(--font-heading)] leading-[1.05] mb-16"
+            className="text-[clamp(2.5rem,5vw,4.5rem)] font-heading leading-[1.05] mb-16"
           >
             I craft digital experiences that feel <span className="italic text-gray-500">calm</span>, <span className="italic text-gray-500">purposeful</span>, and human.
           </motion.h2>
 
-          <motion.div 
+          <motion.div
             className="grid grid-cols-2 gap-y-10 gap-x-8 border-t border-gray-200 pt-10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

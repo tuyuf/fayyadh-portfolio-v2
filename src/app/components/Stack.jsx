@@ -3,25 +3,25 @@
 import { useState, useEffect } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
-function Card({ 
-  children, 
-  onSendToBack, 
-  sensitivity, 
-  randomRotation, 
-  index, 
-  total 
+function Card({
+  children,
+  onSendToBack,
+  sensitivity,
+  randomRotation,
+  index,
+  total
 }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
   const rotateY = useTransform(x, [-100, 100], [-30, 30]);
 
   // UPDATE: Sudut rotasi diperbesar (-15 sampai 15 derajat) agar lebih "menyebar"
   // Menggunakan index agar rotasi konsisten per kartu (tidak bergetar saat re-render)
-  const randomRotate = randomRotation 
-    ? (index % 2 === 0 ? 1 : -1) * (Math.random() * 10 + 5) 
-    : 0; 
+  const randomRotate = randomRotation
+    ? (index % 2 === 0 ? 1 : -1) * ((index * 7 + 3) % 10 + 5)
+    : 0;
 
   const handleDragEnd = (_, info) => {
     if (
@@ -48,7 +48,7 @@ function Card({
         rotateX,
         rotateY,
         rotate: randomRotate, // Rotasi diaplikasikan disini
-        zIndex: index, 
+        zIndex: index,
         cursor: "grab",
       }}
       drag
@@ -58,8 +58,8 @@ function Card({
       onDragEnd={handleDragEnd}
       onClick={onSendToBack}
       initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ 
-        scale: 1, 
+      animate={{
+        scale: 1,
         opacity: 1,
         rotate: randomRotate // Pastikan animasi rotate tereksekusi
       }}
