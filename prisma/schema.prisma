@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model CaseStudyProject {
+  id          String            @id @default(cuid())
+  title       String
+  subtitle    String?
+  credits     String?
+  description String
+  link        String?
+  category    CaseStudyCategory
+  sortOrder   Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  deletedAt   DateTime?
+  images      CaseStudyImage[]
+}
+
+model CaseStudyImage {
+  id           String           @id @default(cuid())
+  projectId    String
+  imageUrl     String
+  cloudinaryId String
+  caption      String?
+  altText      String?
+  sortOrder    Int              @default(0)
+  createdAt    DateTime         @default(now())
+  project      CaseStudyProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model PhotoItem {
+  id           String    @id @default(cuid())
+  imageUrl     String
+  cloudinaryId String
+  caption      String?
+  sortOrder    Int       @default(0)
+  createdAt    DateTime  @default(now())
+  deletedAt    DateTime?
+}
+
+model VideoItem {
+  id          String    @id @default(cuid())
+  title       String
+  url         String
+  thumbnail   String?
+  description String?
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+}
+
+model WebProject {
+  id           String    @id @default(cuid())
+  title        String
+  description  String
+  techStack    Json
+  projectUrl   String?
+  embedUrl     String?
+  thumbnailUrl String?
+  cloudinaryId String?
+  sortOrder    Int       @default(0)
+  createdAt    DateTime  @default(now())
+  deletedAt    DateTime?
+  updatedAt    DateTime  @default(now()) @updatedAt
+}
+
+enum CaseStudyCategory {
+  uiux
+  brand
+}
