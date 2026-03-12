@@ -80,6 +80,11 @@ export default function Stack({
 }) {
   const [order, setOrder] = useState(cards.map((_, i) => i));
 
+  // Sync order when cards are loaded asynchronously
+  useEffect(() => {
+    setOrder(cards.map((_, i) => i));
+  }, [cards.length]);
+
   const sendToBack = () => {
     setOrder((prev) => {
       const newOrder = [...prev];
