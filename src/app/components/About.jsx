@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Stack from "./Stack";
@@ -13,18 +12,11 @@ export default function About() {
     { label: "Vibe", value: "Quiet & Minimal" },
   ];
 
-  const [stackImages, setStackImages] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/photos')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setStackImages(data.map(p => p.imageUrl));
-        }
-      })
-      .catch(err => console.error("Failed to fetch photos:", err));
-  }, []);
+  const stackImages = [
+    "/images/1.webp",
+    "/images/2.webp",
+    "/images/3.webp",
+  ];
 
   return (
     <section
@@ -60,7 +52,6 @@ export default function About() {
                     src={src}
                     alt={`Fayyadh Visual ${i + 1}`}
                     fill
-                    unoptimized
                     className="object-cover pointer-events-none"
                   />
                   <div className="absolute inset-0 bg-black/5 pointer-events-none" />
