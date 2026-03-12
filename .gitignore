@@ -4,3 +4,10 @@ node_modules
 .env
 dist
 build
+
+/src/generated/prisma
+.dev_logs
+.env.local
+dev.db
+skills-lock.json
+restore_data.cjs
