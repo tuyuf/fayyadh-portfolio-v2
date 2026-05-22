@@ -1,0 +1,20 @@
+   ▲ Next.js 15.0.7
+   - Local:        http://localhost:3030
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 825ms
+ ○ Compiling / ...
+ ✓ Compiled / in 9.2s (1300 modules)
+(node:73872) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
+In the next major version (pg-connection-string v3.0.0 and pg v9.0.0), these modes will adopt standard libpq semantics, which have weaker security guarantees.
+
+To prepare for this change:
+- If you want the current behavior, explicitly use 'sslmode=verify-full'
+- If you want libpq compatibility now, use 'uselibpqcompat=true&sslmode=require'
+
+See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled in 584ms (642 modules)
+ GET / 200 in 12269ms
+[?25h

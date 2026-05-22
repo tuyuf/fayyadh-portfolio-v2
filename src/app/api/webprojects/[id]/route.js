@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../../lib/prisma.js";
 import { requireAuth } from "../../../../lib/auth.js";
 
@@ -35,6 +36,7 @@ export async function PUT(request, { params }) {
             },
         });
 
+        revalidatePath("/");
         return NextResponse.json(project);
     } catch (error) {
         return NextResponse.json({ error: "Failed to update" }, { status: 500 });
@@ -51,6 +53,7 @@ export async function DELETE(request, { params }) {
             where: { id },
             data: { deletedAt: new Date() }
         });
+        revalidatePath("/");
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: "Failed to delete" }, { status: 500 });

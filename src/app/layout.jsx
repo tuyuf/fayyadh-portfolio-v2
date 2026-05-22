@@ -1,28 +1,9 @@
 import "./globals.css";
-import localFont from "next/font/local";
-import { Manrope } from "next/font/google";
-import { icons } from "lucide-react";
-
-const soria = localFont({
-  src: "./fonts/Soria-Regular.ttf",
-  variable: "--font-soria",
-  display: "swap",
-});
-
-const harmond = localFont({
-  src: "./fonts/Harmond-SemiBoldCondensed.otf",
-  variable: "--font-harmond",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-});
+import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata = {
   title: "interactwithf",
-  description: "Simple · Thoughtful · Precise",
+  description: "Simple · Thoughtful · Precise — The creative studio of Fayyadh",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -35,14 +16,11 @@ export const metadata = {
   manifest: "/site.webmanifest",
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${manrope.variable} ${soria.variable} ${harmond.variable} bg-[var(--color-bg)] text-[var(--color-text)]`}
-      >
-        {children}
+      <body className="bg-white text-[#051A24] font-pp-neue antialiased">
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

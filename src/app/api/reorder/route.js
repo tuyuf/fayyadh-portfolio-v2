@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../lib/prisma.js";
 import { requireAuth } from "../../../lib/auth.js";
 
@@ -27,14 +28,17 @@ export async function POST(request) {
             return NextResponse.json({ error: "Invalid item type" }, { status: 400 });
         }
 
-        // Perform updates individually to avoid transaction timeouts in serverless environments
-        for (const item of items) {
-            await model.update({
-                where: { id: item.id },
-                data: { sortOrder: item.sortOrder }
-            });
-        }
+      // Batch updates in a transaction for atomicity and performance
+        await prisma.$transaction(
+            items.map((item) =>
+                model.update({
+                    where: { id: item.id },
+                    data: { sortOrder: item.sortOrder },
+                })
+            )
+        );
 
+        revalidatePath("/");
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error("Error reordering items:", error);

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../lib/prisma.js";
 import { requireAuth } from "../../../lib/auth.js";
 
@@ -35,6 +36,7 @@ export async function POST(request) {
             },
         });
 
+        revalidatePath("/");
         return NextResponse.json(video, { status: 201 });
     } catch (error) {
         console.error("Error creating video:", error);
