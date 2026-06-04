@@ -80,11 +80,11 @@ export default function Footer() {
                 About
               </motion.a>
               <motion.a
-                href="#skills"
+                href="#projects"
                 className="text-base text-[#051A24] hover:opacity-70 transition-opacity"
                 variants={fadeUpItem}
               >
-                Skills
+                Projects
               </motion.a>
             </motion.div>
 

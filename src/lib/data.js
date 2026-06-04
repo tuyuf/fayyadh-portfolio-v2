@@ -80,13 +80,81 @@ export async function getMarqueeImages() {
     }
 }
 
+export async function getProfile() {
+    try {
+        return await prisma.profile.findFirst();
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        return null;
+    }
+}
+
+export async function getEducation() {
+    try {
+        return await prisma.educationItem.findMany({
+            where: { deletedAt: null },
+            orderBy: { sortOrder: "asc" },
+        });
+    } catch (error) {
+        console.error("Error fetching education:", error);
+        return [];
+    }
+}
+
+export async function getWorkExperience() {
+    try {
+        return await prisma.workItem.findMany({
+            where: { deletedAt: null },
+            orderBy: { sortOrder: "asc" },
+        });
+    } catch (error) {
+        console.error("Error fetching work experience:", error);
+        return [];
+    }
+}
+
+export async function getSkillCategories() {
+    try {
+        return await prisma.skillCategory.findMany({
+            where: { deletedAt: null },
+            include: {
+                skills: {
+                    where: { deletedAt: null },
+                    orderBy: { sortOrder: "asc" },
+                },
+            },
+            orderBy: { sortOrder: "asc" },
+        });
+    } catch (error) {
+        console.error("Error fetching skill categories:", error);
+        return [];
+    }
+}
+
+export async function getMetrics() {
+    try {
+        return await prisma.metric.findMany({
+            where: { deletedAt: null },
+            orderBy: { sortOrder: "asc" },
+        });
+    } catch (error) {
+        console.error("Error fetching metrics:", error);
+        return [];
+    }
+}
+
 export async function getAllHomepageData() {
-    const [caseStudies, photos, videos, webProjects, marqueeImages] = await Promise.all([
+    const [caseStudies, photos, videos, webProjects, marqueeImages, profile, education, workExperience, skillCategories, metrics] = await Promise.all([
         getCaseStudies(),
         getPhotos(),
         getVideos(),
         getWebProjects(),
         getMarqueeImages(),
+        getProfile(),
+        getEducation(),
+        getWorkExperience(),
+        getSkillCategories(),
+        getMetrics(),
     ]);
 
     return {
@@ -95,6 +163,11 @@ export async function getAllHomepageData() {
         videos,
         webProjects,
         marqueeImages,
+        profile,
+        education,
+        workExperience,
+        skillCategories,
+        metrics,
     };
 }
 

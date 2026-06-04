@@ -3,8 +3,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 
-const CARD_WIDTH_MOBILE = 160;
-const CARD_WIDTH_DESKTOP = 200;
+const CARD_WIDTH_MOBILE = 220;
+const CARD_WIDTH_DESKTOP = 300;
 const STACK_PEEK = 8; // px peek offset per stacked card
 
 export default function ImageCarousel({ images, projectTitle, variant = "portrait" }) {
@@ -25,11 +25,11 @@ export default function ImageCarousel({ images, projectTitle, variant = "portrai
       const containerWidth = wrapperRef.current.offsetWidth;
       const isMobile = window.innerWidth < 768;
       const currentGap = isMobile ? 10 : 14;
-      const maxCards = Math.min(3, totalImages);
+      const maxCards = Math.min(2, totalImages);
       const calculatedWidth = Math.floor(
         (containerWidth - currentGap * (maxCards - 1)) / maxCards
       );
-      const finalWidth = Math.max(120, Math.min(calculatedWidth, 240));
+      const finalWidth = Math.max(120, Math.min(calculatedWidth, 340));
 
       // Lock sizes on first measurement
       if (!lockedSizes.current) {
@@ -74,7 +74,7 @@ export default function ImageCarousel({ images, projectTitle, variant = "portrai
     <div className="mt-6" ref={wrapperRef}>
       {/* Cards container */}
       <div
-        className="relative"
+        className="relative will-change-transform"
         style={{
           height: `${containerHeight}px`,
         }}

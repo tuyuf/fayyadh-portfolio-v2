@@ -40,7 +40,7 @@ export default function ProjectCategorySection({
   return (
     <motion.section
       id={id}
-      className="min-h-[100dvh] flex flex-col justify-center py-16 md:py-24 pb-24"
+      className={`flex flex-col justify-center py-16 md:py-24 pb-24 ${projects.length > 3 ? "min-h-[100dvh]" : ""}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
@@ -48,16 +48,13 @@ export default function ProjectCategorySection({
     >
       {/* Category header - always aligned with the restricted width */}
       <div className="max-w-[900px] mx-auto px-6 w-full">
-        <motion.div className="mb-12 md:mb-16" variants={fadeUpItem}>
-          <div className="flex items-baseline gap-4 mb-4">
-            <span className="font-mono text-[11px] text-[#051A24]/30 tracking-widest">
-              {num}
-            </span>
-            <h3 className="font-pp-mondwest text-2xl md:text-[34px] lg:text-[40px] text-[#051A24] tracking-tight leading-[1.15]">
+        <motion.div className="mb-12 md:mb-16 md:pl-[210px]" variants={fadeUpItem}>
+          <div className="mb-4 pb-4 border-b border-[#051A24]/10">
+            <h3 className="font-pp-mondwest text-[30px] md:text-[38px] lg:text-[46px] text-[#051A24] tracking-tight leading-[1.15]">
               {title}
             </h3>
           </div>
-          <p className="text-sm md:text-base text-[#051A24]/60 leading-relaxed max-w-lg pl-8 md:pl-12">
+          <p className="text-sm md:text-base text-[#051A24]/60 leading-relaxed max-w-lg font-medium">
             {preview}
           </p>
         </motion.div>
@@ -68,11 +65,11 @@ export default function ProjectCategorySection({
         <div
           className="w-screen relative left-1/2 -translate-x-1/2"
           style={{
-            paddingLeft: "max(1.5rem, calc((100vw - 900px) / 2 + 1.5rem))",
+            paddingLeft: "max(1.5rem, calc((100vw - 900px) / 2 + 1.5rem + 225px))",
             paddingRight: "max(1.5rem, calc((100vw - 900px) / 2 + 1.5rem))",
           }}
         >
-          <div className="pl-8 md:pl-12">
+          <div className="flex justify-start">
             {projects.length === 0 ? (
               <motion.p
                 className="text-sm text-[#051A24]/40 italic"
@@ -86,10 +83,10 @@ export default function ProjectCategorySection({
           </div>
         </div>
       ) : (
-        <div className="max-w-[900px] mx-auto px-6 w-full space-y-16 md:space-y-20">
+        <div className="max-w-[900px] mx-auto px-6 w-full space-y-24 md:space-y-32">
           {projects.length === 0 ? (
             <motion.p
-              className="text-sm text-[#051A24]/40 italic pl-8 md:pl-12"
+              className="text-sm text-[#051A24]/40 italic md:pl-[230px]"
               variants={fadeUpItem}
             >
               No projects yet — check back soon.
@@ -98,7 +95,7 @@ export default function ProjectCategorySection({
             projects.map((project, i) => (
               <motion.div
                 key={`${id}-${project.id || i}`}
-                className="pl-8 md:pl-12"
+                className="md:pl-[230px]"
                 variants={fadeUpItem}
               >
                 <ProjectCard project={project} index={i} variant="portrait" />

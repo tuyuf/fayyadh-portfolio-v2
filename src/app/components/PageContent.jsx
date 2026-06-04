@@ -5,8 +5,13 @@ import dynamic from "next/dynamic";
 import HeroSection from "./HeroSection";
 import Projects from "./Projects";
 import IntroSection from "./IntroSection";
+import MetricsSection from "./MetricsSection";
+import About from "./About";
 
 const SidebarNavigation = dynamic(() => import("./SidebarNavigation"), {
+  loading: () => null,
+});
+const MobileSectionNav = dynamic(() => import("./MobileSectionNav"), {
   loading: () => null,
 });
 const Marquee = dynamic(() => import("./Marquee"), {
@@ -20,12 +25,6 @@ const Marquee = dynamic(() => import("./Marquee"), {
     </div>
   ),
 });
-const About = dynamic(() => import("./About"), {
-  loading: () => null,
-});
-const Skills = dynamic(() => import("./Skills"), {
-  loading: () => null,
-});
 const PartnerSection = dynamic(() => import("./PartnerSection"), {
   loading: () => null,
 });
@@ -33,11 +32,21 @@ const Footer = dynamic(() => import("./Footer"), {
   loading: () => null,
 });
 
-export default function PageContent({ caseStudies, photos, videos, webProjects }) {
+export default function PageContent({
+  caseStudies,
+  photos,
+  videos,
+  webProjects,
+  profile,
+  metrics,
+}) {
   return (
     <>
       <Suspense fallback={null}>
         <SidebarNavigation />
+      </Suspense>
+      <Suspense fallback={null}>
+        <MobileSectionNav />
       </Suspense>
       <div id="hero">
         <HeroSection />
@@ -46,18 +55,14 @@ export default function PageContent({ caseStudies, photos, videos, webProjects }
         <Marquee />
       </Suspense>
       <IntroSection />
+      <MetricsSection metrics={metrics} />
       <Projects
         caseStudies={caseStudies}
         photos={photos}
         videos={videos}
         webProjects={webProjects}
       />
-      <div id="about">
-        <Suspense fallback={null}>
-          <About />
-          <Skills />
-        </Suspense>
-      </div>
+      <About profile={profile} />
       <Suspense fallback={null}>
         <PartnerSection />
       </Suspense>

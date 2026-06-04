@@ -48,7 +48,7 @@ export default function Marquee({ initialImages }) {
 
   return (
     <div className="w-full mt-16 md:mt-20 mb-16 overflow-hidden">
-      <div className="flex items-start animate-marquee" style={{ width: "max-content" }}>
+      <div className="flex items-start animate-marquee will-change-transform" style={{ width: "max-content" }}>
         {isLoading && images.length === 0 ? (
           Array.from({ length: 8 }).map((_, i) => (
             <div

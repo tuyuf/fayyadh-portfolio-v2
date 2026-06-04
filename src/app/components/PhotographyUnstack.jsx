@@ -177,7 +177,9 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
           pin: true,
           start: "top top",
           end: "+=300%",
-          scrub: 1,
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
         },
       });
 
@@ -254,8 +256,8 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
           <h2
             ref={textRef}
-            className="font-pp-mondwest text-[22vw] md:text-[16vw] text-[#051A24] tracking-tighter whitespace-nowrap"
-            style={{ opacity: 0.08 }}
+            className="font-pp-mondwest text-[12vw] md:text-[8vw] text-[#051A24] tracking-tighter whitespace-nowrap"
+            style={{ opacity: 0.25 }}
           >
             PHOTOGRAPHY
           </h2>
@@ -264,12 +266,12 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
         {/* Fan-out Image Layers */}
         <div className="relative w-full h-full">
           {activePhotos.map((photo, i) => (
-            <div
+              <div
               key={photo.id}
               ref={(el) => {
                 itemsRef.current[i] = el;
               }}
-              className="aspect-[3/4] overflow-hidden rounded-xl shadow-md relative"
+              className="aspect-[3/4] overflow-hidden rounded-xl shadow-md relative will-change-transform"
             >
               <Image
                 src={photo.imageUrl}

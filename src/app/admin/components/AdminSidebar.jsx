@@ -2,7 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Palette, Camera, Video, Code2 } from "lucide-react";
+import {
+    LayoutDashboard,
+    Palette,
+    Camera,
+    Video,
+    Code2,
+    UserCircle2,
+    GraduationCap,
+    BriefcaseBusiness,
+    ListTree,
+    ListChecks,
+    BarChart3,
+} from "lucide-react";
 
 const navItems = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -10,6 +22,12 @@ const navItems = [
     { href: "/admin/photos", label: "Photography", icon: Camera },
     { href: "/admin/videos", label: "Videography", icon: Video },
     { href: "/admin/webprojects", label: "Web Dev", icon: Code2 },
+    { href: "/admin/profile", label: "Profile", icon: UserCircle2 },
+    { href: "/admin/education", label: "Education", icon: GraduationCap },
+    { href: "/admin/work", label: "Work", icon: BriefcaseBusiness },
+    { href: "/admin/skills/categories", label: "Skill Categories", icon: ListTree },
+    { href: "/admin/skills/items", label: "Skill Items", icon: ListChecks },
+    { href: "/admin/metrics", label: "Metrics", icon: BarChart3 },
 ];
 
 export default function AdminSidebar() {

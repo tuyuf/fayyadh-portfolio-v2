@@ -40,13 +40,23 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth DITIHAP — Lenis handle smooth scroll sendiri */
+  scroll-behavior: auto;
 }
 
 html, body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
+}
+
+/* Promote animated elements to their own GPU layer */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
 }
 
 h2 {

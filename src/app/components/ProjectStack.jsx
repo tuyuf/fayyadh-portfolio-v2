@@ -3,8 +3,8 @@
 import { useState, useCallback, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 
-const CARD_WIDTH_MOBILE = 280;
-const CARD_WIDTH_DESKTOP = 420;
+const CARD_WIDTH_MOBILE = 360;
+const CARD_WIDTH_DESKTOP = 560;
 const STACK_PEEK = 8; // px peek offset per stacked card
 const GAP = 24;
 const WEB_CARD_ASPECT = 9 / 16; // 16:9 aspect ratio
@@ -73,7 +73,17 @@ export default function ProjectStack({ projects }) {
           return (
             <div
               key={`stack-card-${project.id || i}`}
-              className="absolute top-0 left-0 cursor-pointer group/card"
+              className="absolute top-0 left-0 cursor-pointer group/card focus:outline-none focus:ring-2 focus:ring-[#051A24]/30 rounded-xl"
+              tabIndex={0}
+              role="button"
+              aria-label={`${project.title} — press Enter to ${isStacked ? "expand" : "view details"}`}
+              onClick={goNext}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  goNext();
+                }
+              }}
               style={{
                 width: `${cardWidth}px`,
                 height: `${cardHeight}px`,
@@ -110,7 +120,7 @@ export default function ProjectStack({ projects }) {
                 ? "border-[#051A24]/10 text-[#051A24]/20 cursor-not-allowed"
                 : "border-[#051A24]/25 text-[#051A24]/70 hover:border-[#051A24] hover:bg-[#051A24] hover:text-white"
             }`}
-            aria-label="Spread card"
+            aria-label="Previous project"
           >
             <svg
               width="14"
@@ -133,7 +143,7 @@ export default function ProjectStack({ projects }) {
                 ? "border-[#051A24]/10 text-[#051A24]/20 cursor-not-allowed"
                 : "border-[#051A24]/25 text-[#051A24]/70 hover:border-[#051A24] hover:bg-[#051A24] hover:text-white"
             }`}
-            aria-label="Stack card"
+            aria-label="Next project"
           >
             <svg
               width="14"

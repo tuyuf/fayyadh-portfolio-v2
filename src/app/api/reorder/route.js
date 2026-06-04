@@ -20,7 +20,12 @@ export async function POST(request) {
             photos: prisma.photoItem,
             videos: prisma.videoItem,
             webprojects: prisma.webProject,
-            casestudyimages: prisma.caseStudyImage
+            casestudyimages: prisma.caseStudyImage,
+            education: prisma.educationItem,
+            work: prisma.workItem,
+            skillcategories: prisma.skillCategory,
+            skillitems: prisma.skillItem,
+            metrics: prisma.metric,
         };
 
         const model = modelMap[type.toLowerCase()];

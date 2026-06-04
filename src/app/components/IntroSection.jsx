@@ -1,91 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AnimatedContainer, AnimatedItem } from "./AnimatedSection";
 
-const stats = [
-  { label: "Based in", value: "Semarang, ID" },
-  { label: "Focus", value: "Design + Dev" },
-  { label: "Approach", value: "Quiet & Minimal" },
-  { label: "Status", value: "Open for work" },
+const paragraphs = [
+  "Muhammad Fayyadh is a design and development studio crafting digital experiences at the intersection of visual design and full-stack engineering. Every project is shaped by clarity, intent, and a deep respect for the people who use it.",
+  "The work spans brand identities, UI/UX systems, and web applications — always built with the same conviction: that good design should feel inevitable, and good code should feel invisible.",
+  "Open for collaborations, freelance work, and ambitious side projects. If you have something meaningful to build, let's talk.",
 ];
 
 export default function IntroSection() {
   return (
-    <AnimatedContainer
+    <section
       id="intro"
       className="flex flex-col items-center justify-center min-h-[100dvh] py-16 md:py-24"
-      as="section"
     >
-      <div className="w-full max-w-[900px] mx-auto px-6">
-        {/* Intro text */}
-        <div className="space-y-5">
-          <AnimatedItem>
-            <p className="text-sm md:text-base text-[#051A24]/80 leading-relaxed">
-              Hi, I'm Fayyadh — a designer and developer based in Semarang, Indonesia.
-              I craft digital experiences that bridge design and development,
-              moving between interfaces, brands, and code with equal curiosity.
-            </p>
-          </AnimatedItem>
+      <div className="w-full max-w-[600px] mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-left"
+        >
+          {/* Symbol */}
+          <div className="flex justify-center mb-12 md:mb-16">
+            <span className="text-4xl md:text-5xl text-[#051A24]/20 select-none">
+              &#10022;
+            </span>
+          </div>
 
-          <AnimatedItem>
-            <p className="text-sm md:text-base text-[#051A24]/60 leading-relaxed">
-              This space is a living archive of selected works across UI/UX, brand identity,
-              photography, videography, and web development. Each project is shaped by clarity,
-              intent, and a deep respect for the user.
-            </p>
-          </AnimatedItem>
-
-          <AnimatedItem>
-            <p className="text-sm md:text-base text-[#051A24]/60 leading-relaxed">
-              The studio is deliberately small. I guide the creative vision on every project,
-              moving fast without cutting corners. Open for collaborations and freelance work.
-            </p>
-          </AnimatedItem>
-
-          {/* Stats / quick facts */}
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.08,
-                  delayChildren: 0.3,
-                },
-              },
-            }}
-          >
-            {stats.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: 0.5,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    },
-                  },
+          {/* Paragraphs */}
+          <div className="space-y-6 md:space-y-8">
+            {paragraphs.map((text, index) => (
+              <motion.p
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  ease: [0.25, 0.1, 0.25, 1],
                 }}
+                className="font-pp-neue text-lg md:text-xl text-[#051A24]/85 leading-relaxed"
               >
-                <p className="text-[10px] font-mono text-[#051A24]/40 uppercase tracking-wider mb-1">
-                  {item.label}
-                </p>
-                <p className="text-sm md:text-base text-[#051A24] font-medium">
-                  {item.value}
-                </p>
-              </motion.div>
+                {text}
+              </motion.p>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
-    </AnimatedContainer>
+    </section>
   );
 }
