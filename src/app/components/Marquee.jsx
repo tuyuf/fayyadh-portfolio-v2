@@ -35,8 +35,9 @@ export default function Marquee({ initialImages }) {
     return interleaved;
   }, [initialImages, swrImages]);
 
-  // Duplicate for seamless infinite scroll
-  const allImages = [...images, ...images];
+  // Repeat images multiple times to ensure it's always wider than the screen
+  // Half of the array must be wider than any screen for translateX(-50%) to work seamlessly
+  const allImages = Array(8).fill(images).flat();
 
   // Varying skeleton heights
   const skeletonHeights = [
