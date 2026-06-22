@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import useMarqueeImages from "../hooks/useMarqueeImages";
 import Image from "next/image";
 
@@ -43,8 +43,19 @@ export default function Marquee({ initialImages }) {
   // Duplicate EXACTLY ONCE for the seamless CSS -50% translateX loop
   const allImages = [...singleSet, ...singleSet];
 
-  // Dynamic duration so speed is consistent (e.g. 8 seconds per image)
-  const animDuration = singleSet.length * 8;
+  // Dynamic duration to keep speed consistent. Mobile images are smaller,
+  // so they need a shorter duration to travel at the same visual velocity.
+  const [isMobile, setIsMobile] = useState(true); // default to true to avoid hydration mismatch assuming mobile-first
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 5 seconds per image on mobile (faster), 8 seconds on desktop
+  const animDuration = singleSet.length * (isMobile ? 5 : 8);
 
   // Varying skeleton heights
   const skeletonHeights = [
