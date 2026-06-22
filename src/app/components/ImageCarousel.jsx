@@ -39,8 +39,8 @@ export default function ImageCarousel({ images, projectTitle, variant = "portrai
   }, [collapsedCount]);
 
   const isWeb = variant === "web";
-  const aspectRatio = isWeb ? "16 / 9" : "3 / 4";
-  const aspectNum = isWeb ? 9 / 16 : 4 / 3;
+  const aspectRatio = isWeb ? "14 / 9" : "3 / 4";
+  const aspectNum = isWeb ? 9 / 14 : 4 / 3;
 
   if (totalImages === 0) return null;
 

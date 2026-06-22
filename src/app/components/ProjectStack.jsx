@@ -7,7 +7,7 @@ const CARD_WIDTH_MOBILE = 360;
 const CARD_WIDTH_DESKTOP = 720;
 const STACK_PEEK = 8; // px peek offset per stacked card
 const GAP = 24;
-const WEB_CARD_ASPECT = 9 / 16; // 16:9 aspect ratio
+const WEB_CARD_ASPECT = 9 / 14; // 14:9 aspect ratio (middle ground between 16:10 and 3:2)
 
 export default function ProjectStack({ projects }) {
   const totalProjects = projects.length;

@@ -205,6 +205,7 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
           scrub: 0.5,
           invalidateOnRefresh: true,
           fastScrollEnd: true,
+          anticipatePin: 1,
         },
       });
 
