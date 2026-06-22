@@ -35,9 +35,16 @@ export default function Marquee({ initialImages }) {
     return interleaved;
   }, [initialImages, swrImages]);
 
-  // Repeat images multiple times to ensure it's always wider than the screen
-  // Half of the array must be wider than any screen for translateX(-50%) to work seamlessly
-  const allImages = Array(8).fill(images).flat();
+  // Ensure the base set of images is always long enough to cover wide screens
+  // We want at least 10 items in a single set to be safe.
+  const baseSetCount = images.length > 0 ? Math.ceil(10 / images.length) : 1;
+  const singleSet = Array(baseSetCount).fill(images).flat();
+
+  // Duplicate EXACTLY ONCE for the seamless CSS -50% translateX loop
+  const allImages = [...singleSet, ...singleSet];
+
+  // Dynamic duration so speed is consistent (e.g. 8 seconds per image)
+  const animDuration = singleSet.length * 8;
 
   // Varying skeleton heights
   const skeletonHeights = [
@@ -49,7 +56,10 @@ export default function Marquee({ initialImages }) {
 
   return (
     <div className="w-full mt-16 md:mt-20 mb-16 overflow-hidden">
-      <div className="flex items-start animate-marquee will-change-transform" style={{ width: "max-content" }}>
+      <div 
+        className="flex items-start animate-marquee will-change-transform" 
+        style={{ width: "max-content", animationDuration: `${animDuration}s` }}
+      >
         {isLoading && images.length === 0 ? (
           Array.from({ length: 8 }).map((_, i) => (
             <div
