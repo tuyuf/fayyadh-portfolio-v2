@@ -19,6 +19,10 @@ model CaseStudyProject {
   updatedAt   DateTime          @updatedAt
   deletedAt   DateTime?
   images      CaseStudyImage[]
+
+  @@index([deletedAt])
+  @@index([sortOrder])
+  @@index([category])
 }
 
 model CaseStudyImage {
@@ -28,9 +32,14 @@ model CaseStudyImage {
   cloudinaryId String
   caption      String?
   altText      String?
-  sortOrder    Int              @default(0)
-  createdAt    DateTime         @default(now())
+  width        Int?
+  height       Int?
+  sortOrder    Int               @default(0)
+  createdAt    DateTime          @default(now())
   project      CaseStudyProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([sortOrder])
 }
 
 model PhotoItem {
@@ -41,6 +50,9 @@ model PhotoItem {
   sortOrder    Int       @default(0)
   createdAt    DateTime  @default(now())
   deletedAt    DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
 }
 
 model VideoItem {
@@ -52,6 +64,9 @@ model VideoItem {
   sortOrder   Int       @default(0)
   createdAt   DateTime  @default(now())
   deletedAt   DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
 }
 
 model WebProject {
@@ -67,9 +82,100 @@ model WebProject {
   createdAt    DateTime  @default(now())
   deletedAt    DateTime?
   updatedAt    DateTime  @default(now()) @updatedAt
+
+  @@index([deletedAt])
+  @@index([sortOrder])
 }
 
 enum CaseStudyCategory {
   uiux
   brand
+}
+
+model Profile {
+  id                String   @id @default(cuid())
+  name              String
+  role              String
+  email             String?
+  phone             String?
+  birthDate         String?
+  aboutText         String
+  motto             String?
+  photoUrl          String?
+  photoCloudinaryId String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model EducationItem {
+  id          String   @id @default(cuid())
+  year        String
+  institution String
+  degree      String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
+}
+
+model WorkItem {
+  id          String   @id @default(cuid())
+  year        String
+  company     String
+  position    String
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
+}
+
+model SkillCategory {
+  id        String      @id @default(cuid())
+  label     String
+  title     String
+  sortOrder Int         @default(0)
+  skills    SkillItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
+}
+
+model SkillItem {
+  id          String        @id @default(cuid())
+  categoryId  String
+  name        String
+  level       Int           @default(1)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+  category    SkillCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([deletedAt])
+  @@index([sortOrder])
+}
+
+model Metric {
+  id          String   @id @default(cuid())
+  label       String
+  value       String
+  suffix      String?
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  @@index([deletedAt])
+  @@index([sortOrder])
 }

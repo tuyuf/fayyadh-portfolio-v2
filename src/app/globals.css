@@ -2,38 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-accent: #111111;
-  --font-heading: var(--font-harmond);
-  --font-body: var(--font-manrope);
+/* ===== FONT FACES ===== */
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('https://assets.website-files.com/6009ec8cda7f305645c9d91b/60176f9bb43e36419997ecfe_PPNeueMontreal-Book.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
 }
 
-html,
-body {
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('https://assets.website-files.com/6009ec8cda7f305645c9d91b/60176f9b39c5673e51a86f5a_PPNeueMontreal-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Mondwest';
+  src: url('/PPMondwest-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ===== BASE STYLES ===== */
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #051A24;
+  --color-primary: #051A24;
+  --color-secondary: #0D212C;
+  --color-muted: #273C46;
+  --color-light: #F6FCFF;
+  --color-light-muted: #E0EBF0;
+  --font-heading: 'PP Mondwest', serif;
+  --font-body: 'PP Neue Montreal', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html, body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
 }
 
+/* Promote animated elements to their own GPU layer */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
 
 h2 {
   font-feature-settings: "liga" 1, "kern" 1;
 }
 
-@font-face {
-  font-family: "Soria";
-  src: url("/Soria-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
 }
 
-/* hide scrollbar */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+}
+
+/* ===== UTILITY ===== */
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -41,4 +108,22 @@ html {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ===== BUTTON SHADOWS ===== */
+
+.shadow-primary-btn {
+  box-shadow:
+    0 1px 2px 0 rgba(5, 26, 36, 0.1),
+    0 4px 4px 0 rgba(5, 26, 36, 0.09),
+    0 9px 6px 0 rgba(5, 26, 36, 0.05),
+    0 17px 7px 0 rgba(5, 26, 36, 0.01),
+    0 26px 7px 0 rgba(5, 26, 36, 0),
+    inset 0 2px 8px 0 rgba(255, 255, 255, 0.5);
+}
+
+.shadow-secondary-btn {
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.05),
+    0 4px 30px rgba(0, 0, 0, 0.08);
 }
