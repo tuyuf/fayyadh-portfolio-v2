@@ -70,7 +70,7 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
           {hasMultipleImages ? (
             <ImageCarousel images={project.images} projectTitle={project.title} variant={variant} />
           ) : project.images?.[0]?.imageUrl ? (
-            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-full aspect-[3/4]"}`}>
+            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-[14/9]" : "w-full aspect-[3/4]"}`}>
               <Image
                 src={project.images[0].imageUrl}
                 alt={project.images[0].altText || project.title}
@@ -81,7 +81,7 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
               />
             </div>
           ) : project.imageUrl ? (
-            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-full aspect-[3/4]"}`}>
+            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-[14/9]" : "w-full aspect-[3/4]"}`}>
               <Image
                 src={project.imageUrl}
                 alt={project.title}
@@ -92,7 +92,7 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
               />
             </div>
           ) : isWeb ? (
-            <div className="mt-6 w-full aspect-video rounded-xl bg-[#F2F2F2] flex items-center justify-center">
+            <div className="mt-6 w-full aspect-[14/9] rounded-xl bg-[#F2F2F2] flex items-center justify-center">
               <span className="text-xs text-[#051A24]/30 uppercase tracking-wider">Preview not available</span>
             </div>
           ) : null}
