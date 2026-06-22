@@ -1,12 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useScroll, useSpring } from "framer-motion";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -38,42 +34,24 @@ export default function About({ profile }) {
   const sectionRef = useRef(null);
   const sigRef = useRef(null);
 
-  useEffect(() => {
-    if (!sigRef.current || !sectionRef.current) return;
+  const { scrollYProgress } = useScroll({
+    target: sigRef,
+    offset: ["start 100%", "start 70%"], // Finishes right where the user took the screenshot
+  });
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        sigRef.current,
-        { clipPath: "inset(0 100% 0 0)" },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: sigRef.current,
-            start: "top 85%",
-            end: "top 45%",
-            scrub: true,
-          },
-        }
-      );
-    }, sectionRef.current);
+  // Add a spring to smooth out the scroll progress, giving the illusion of a "slower" draw
+  // even if the user scrolls quickly over the offset area.
+  const smoothPathLength = useSpring(scrollYProgress, {
+    stiffness: 40,
+    damping: 15,
+    restDelta: 0.001,
+  });
 
-    return () => ctx.revert();
-  }, []);
-
-  const aboutParagraphs = (profile?.aboutText || "")
-    .split("\n")
-    .map((text) => text.trim())
-    .filter(Boolean);
-
-  const defaultParagraphs = [
-    "I craft digital experiences that bridge design and development. From intuitive interfaces to full-stack applications, every project is shaped by clarity, intent, and a deep respect for the user.",
-    "The studio is deliberately small. I guide the creative vision on every project, moving fast without cutting corners.",
-    "Open for collaborations and freelance work.",
+  const paragraphs = [
+    "Thank you for taking the time to explore my digital space and reviewing my work.",
+    "I believe that great design is not just about how things look, but how they make people feel. My goal is to craft experiences that are intuitive, memorable, and fundamentally human.",
+    "Whether you have a project in mind, an idea to discuss, or just want to say hi—my inbox is always open. Let's create something meaningful together.",
   ];
-
-  const paragraphs =
-    aboutParagraphs.length > 0 ? aboutParagraphs : defaultParagraphs;
 
   return (
     <section
@@ -124,12 +102,13 @@ export default function About({ profile }) {
             xmlns="http://www.w3.org/2000/svg"
             className="opacity-90"
           >
-            <path
+            <motion.path
               d={signaturePath}
               stroke="#051A24"
               strokeWidth="2"
               strokeLinecap="round"
               fill="none"
+              style={{ pathLength: smoothPathLength }}
             />
           </svg>
         </div>

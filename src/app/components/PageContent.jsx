@@ -25,9 +25,6 @@ const Marquee = dynamic(() => import("./Marquee"), {
     </div>
   ),
 });
-const PartnerSection = dynamic(() => import("./PartnerSection"), {
-  loading: () => null,
-});
 const Footer = dynamic(() => import("./Footer"), {
   loading: () => null,
 });
@@ -63,9 +60,6 @@ export default function PageContent({
         webProjects={webProjects}
       />
       <About profile={profile} />
-      <Suspense fallback={null}>
-        <PartnerSection />
-      </Suspense>
       <Suspense fallback={null}>
         <Footer />
       </Suspense>

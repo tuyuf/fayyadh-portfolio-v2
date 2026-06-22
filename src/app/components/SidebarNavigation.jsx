@@ -8,8 +8,9 @@ export const SECTIONS = [
   { id: "uiux", num: "03", label: "UI / UX Design" },
   { id: "brand", num: "04", label: "Brand & Identity" },
   { id: "webdev", num: "05", label: "Web Development" },
-  { id: "photovideo", num: "06", label: "Photography" },
-  { id: "about", num: "07", label: "About & Skills" },
+  { id: "recap", num: "06", label: "Projects Recap" },
+  { id: "photovideo", num: "07", label: "Photography" },
+  { id: "about", num: "08", label: "Greetings" },
 ];
 
 function AnimatedText({ text, className, baseDelay = 0, charStagger = 0.03, trigger = 0 }) {
@@ -45,6 +46,7 @@ function AnimatedText({ text, className, baseDelay = 0, charStagger = 0.03, trig
 export default function SidebarNavigation() {
   const [activeSection, setActiveSection] = useState("intro");
   const [isVisible, setIsVisible] = useState(false);
+  const [inFooter, setInFooter] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [triggers, setTriggers] = useState({});
   const [animatedItems, setAnimatedItems] = useState({});
@@ -75,23 +77,25 @@ export default function SidebarNavigation() {
         const vh = window.innerHeight;
 
         const heroEl = document.getElementById("hero");
-        const partnerEl = document.getElementById("partner");
+        const footerEl = document.getElementById("footer");
 
         let visible = false;
+        let footerVisible = false;
 
         if (heroEl) {
           const heroBottom = heroEl.getBoundingClientRect().bottom + scrollY;
           visible = scrollY >= heroBottom - 100;
         }
 
-        if (visible && partnerEl) {
-          const partnerTop = partnerEl.getBoundingClientRect().top + scrollY;
-          if (scrollY >= partnerTop - vh * 0.5) {
-            visible = false;
+        if (footerEl) {
+          const footerTop = footerEl.getBoundingClientRect().top + scrollY;
+          if (scrollY >= footerTop - vh * 0.5) {
+            footerVisible = true;
           }
         }
 
         setIsVisible(visible);
+        setInFooter(footerVisible);
 
         const viewportCenter = scrollY + vh * 0.4;
         let current = "intro";
@@ -182,6 +186,13 @@ export default function SidebarNavigation() {
     setHoveredItem(null);
   };
 
+  const scrollToHero = () => {
+    const heroEl = document.getElementById("hero");
+    if (heroEl) {
+      heroEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <>
       {/* Desktop sidebar navigation */}
@@ -190,8 +201,9 @@ export default function SidebarNavigation() {
           isVisible ? "opacity-100 z-40" : "opacity-0 pointer-events-none z-0"
         }`}
       >
+        {/* Section navigation — always visible */}
         {SECTIONS.map((section, index) => {
-          const isActive = activeSection === section.id;
+          const isActive = !inFooter && activeSection === section.id;
           const itemDelay = index * 0.1;
           const isHovered = hoveredItem === section.id;
           const shouldShowLabel = isActive || isHovered;
@@ -235,6 +247,48 @@ export default function SidebarNavigation() {
             </button>
           );
         })}
+
+        {/* Arrow-up button — appears below sections when in footer */}
+        {inFooter && (
+          <button
+            onClick={scrollToHero}
+            onMouseEnter={() => handleMouseEnter("backToTop")}
+            onMouseLeave={handleMouseLeave}
+            className="group flex items-center gap-2 text-left hover:translate-x-1 transition-all duration-300 mt-1"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) 0.1s",
+            }}
+            aria-label="Scroll to top"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-[#051A24] transition-colors duration-300"
+            >
+              <path
+                d="M8 13V3M8 3L3 8M8 3L13 8"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {hoveredItem === "backToTop" && (
+              <AnimatedText
+                text="Back to top"
+                className="font-pp-neue text-sm text-[#051A24] border-b border-[#051A24] pb-0.5 ml-1 inline-block"
+                baseDelay={0.05}
+                charStagger={0.03}
+                trigger={triggers["backToTop"] || 0}
+              />
+            )}
+          </button>
+        )}
       </nav>
 
     </>

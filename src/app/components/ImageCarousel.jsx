@@ -3,50 +3,28 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 
-const CARD_WIDTH_MOBILE = 220;
-const CARD_WIDTH_DESKTOP = 300;
-const STACK_PEEK = 8; // px peek offset per stacked card
+const CARD_WIDTH_MOBILE = 240;
+const CARD_WIDTH_DESKTOP = 320;
+const STACK_PEEK = 12; // px peek offset per stacked card
 
 export default function ImageCarousel({ images, projectTitle, variant = "portrait" }) {
   const totalImages = images.length;
-  // collapsedCount = how many images have collapsed onto the first image
-  // 0 = all spread, 1 = image[1] stacked on image[0], 2 = image[1]+image[2] stacked, etc.
   const [collapsedCount, setCollapsedCount] = useState(0);
   const wrapperRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(CARD_WIDTH_DESKTOP);
-  const [gap, setGap] = useState(14);
-  // Lock card width after first measurement so it never changes due to container shrinking
-  const lockedSizes = useRef(null);
+  const [gap, setGap] = useState(24);
 
-  // Responsive sizing — only on mount and window resize
+  // Responsive sizing
   useEffect(() => {
     const updateSizes = () => {
-      if (!wrapperRef.current) return;
-      const containerWidth = wrapperRef.current.offsetWidth;
       const isMobile = window.innerWidth < 768;
-      const currentGap = isMobile ? 10 : 14;
-      const maxCards = Math.min(2, totalImages);
-      const calculatedWidth = Math.floor(
-        (containerWidth - currentGap * (maxCards - 1)) / maxCards
-      );
-      const finalWidth = Math.max(120, Math.min(calculatedWidth, 340));
-
-      // Lock sizes on first measurement
-      if (!lockedSizes.current) {
-        lockedSizes.current = { cardWidth: finalWidth, gap: currentGap };
-      }
-      setCardWidth(lockedSizes.current.cardWidth);
-      setGap(lockedSizes.current.gap);
+      setCardWidth(isMobile ? CARD_WIDTH_MOBILE : CARD_WIDTH_DESKTOP);
+      setGap(isMobile ? 16 : 24);
     };
     updateSizes();
-    const handleResize = () => {
-      // Reset lock on actual window resize so it adapts
-      lockedSizes.current = null;
-      updateSizes();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [totalImages]);
+    window.addEventListener("resize", updateSizes);
+    return () => window.removeEventListener("resize", updateSizes);
+  }, []);
 
   // Click > : collapse one more (sequential: 2→1, 3→stack, 4→stack…)
   const goNext = useCallback(() => {
@@ -80,23 +58,20 @@ export default function ImageCarousel({ images, projectTitle, variant = "portrai
         }}
       >
         {images.map((img, i) => {
-          let x, zIndex;
+          let x;
+          const zIndex = i + 1; // Static zIndex ensures it slides cleanly off the top without popping behind
 
           if (i === 0) {
             // Base image: always at position 0
             x = 0;
-            zIndex = 1;
           } else if (i <= collapsedCount) {
             // Collapsed: stacked on image[0] with peek offset
             x = i * STACK_PEEK;
-            zIndex = i + 1;
           } else {
             // Spread: position relative to the ACTUAL stack width
-            // Stack right edge = cardWidth + collapsedCount * STACK_PEEK
             const stackRightEdge = cardWidth + collapsedCount * STACK_PEEK;
             const spreadIndex = i - collapsedCount; // 1-based (1 = first after stack)
             x = stackRightEdge + gap + (spreadIndex - 1) * (cardWidth + gap);
-            zIndex = 1;
           }
 
           const isStacked = i > 0 && i <= collapsedCount;
@@ -110,10 +85,7 @@ export default function ImageCarousel({ images, projectTitle, variant = "portrai
                 zIndex,
                 transform: `translateX(${x}px)`,
                 transition:
-                  "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease",
-                boxShadow: isStacked
-                  ? "0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)"
-                  : "0 1px 6px rgba(0,0,0,0.04)",
+                  "transform 0.7s cubic-bezier(0.25, 1, 0.35, 1)",
               }}
             >
               <Image

@@ -46,15 +46,15 @@ export default function ProjectCategorySection({
       viewport={{ once: true, amount: 0.15 }}
       variants={staggerContainer}
     >
-      {/* Category header - always aligned with the restricted width */}
-      <div className="max-w-[900px] mx-auto px-6 w-full">
-        <motion.div className="mb-12 md:mb-16 md:pl-[210px]" variants={fadeUpItem}>
-          <div className="mb-4 pb-4 border-b border-[#051A24]/10">
-            <h3 className="font-pp-mondwest text-[30px] md:text-[38px] lg:text-[46px] text-[#051A24] tracking-tight leading-[1.15]">
+      {/* Category header - slightly shifted left layout */}
+      <div className="max-w-[600px] mx-auto px-6 w-full text-left">
+        <motion.div className="mb-12 md:mb-20" variants={fadeUpItem}>
+          <div className="mb-2 md:mb-4">
+            <h3 className="font-pp-mondwest font-bold text-[28px] md:text-[40px] lg:text-[48px] whitespace-nowrap text-[#051A24] tracking-tight leading-[1]">
               {title}
             </h3>
           </div>
-          <p className="text-sm md:text-base text-[#051A24]/60 leading-relaxed max-w-lg font-medium">
+          <p className="text-sm md:text-base md:text-lg text-[#051A24]/70 leading-relaxed font-medium">
             {preview}
           </p>
         </motion.div>
@@ -62,13 +62,7 @@ export default function ProjectCategorySection({
 
       {/* Projects list */}
       {isHorizontal ? (
-        <div
-          className="w-screen relative left-1/2 -translate-x-1/2"
-          style={{
-            paddingLeft: "max(1.5rem, calc((100vw - 900px) / 2 + 1.5rem + 225px))",
-            paddingRight: "max(1.5rem, calc((100vw - 900px) / 2 + 1.5rem))",
-          }}
-        >
+        <div className="max-w-[600px] mx-auto px-6 w-full relative">
           <div className="flex justify-start">
             {projects.length === 0 ? (
               <motion.p
@@ -83,10 +77,10 @@ export default function ProjectCategorySection({
           </div>
         </div>
       ) : (
-        <div className="max-w-[900px] mx-auto px-6 w-full space-y-24 md:space-y-32">
+        <div className="max-w-[600px] mx-auto px-6 w-full space-y-24 md:space-y-32">
           {projects.length === 0 ? (
             <motion.p
-              className="text-sm text-[#051A24]/40 italic md:pl-[230px]"
+              className="text-sm text-[#051A24]/40 italic"
               variants={fadeUpItem}
             >
               No projects yet — check back soon.
@@ -95,8 +89,8 @@ export default function ProjectCategorySection({
             projects.map((project, i) => (
               <motion.div
                 key={`${id}-${project.id || i}`}
-                className="md:pl-[230px]"
                 variants={fadeUpItem}
+                className="w-full"
               >
                 <ProjectCard project={project} index={i} variant="portrait" />
               </motion.div>

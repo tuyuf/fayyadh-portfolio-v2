@@ -40,7 +40,6 @@
 }
 
 html {
-  /* scroll-behavior: smooth DITIHAP — Lenis handle smooth scroll sendiri */
   scroll-behavior: auto;
 }
 
@@ -96,7 +95,7 @@ h2 {
 
 @media (max-width: 768px) {
   .animate-marquee {
-    animation: marquee 10s linear infinite;
+    animation: marquee 25s linear infinite;
   }
 }
 

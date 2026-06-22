@@ -1,5 +1,4 @@
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata = {
   title: "interactwithf",
@@ -20,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-white text-[#051A24] font-pp-neue antialiased">
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
       </body>
     </html>
   );

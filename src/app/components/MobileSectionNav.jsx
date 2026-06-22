@@ -22,7 +22,7 @@ export default function MobileSectionNav() {
         const vh = window.innerHeight;
 
         const heroEl = document.getElementById("hero");
-        const partnerEl = document.getElementById("partner");
+        const footerEl = document.getElementById("footer");
 
         let visible = false;
 
@@ -31,9 +31,9 @@ export default function MobileSectionNav() {
           visible = scrollY >= heroBottom - 100;
         }
 
-        if (visible && partnerEl) {
-          const partnerTop = partnerEl.getBoundingClientRect().top + scrollY;
-          if (scrollY >= partnerTop - vh * 0.5) {
+        if (visible && footerEl) {
+          const footerTop = footerEl.getBoundingClientRect().top + scrollY;
+          if (scrollY >= footerTop - vh * 0.5) {
             visible = false;
           }
         }

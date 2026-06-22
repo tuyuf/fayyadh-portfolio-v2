@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const paragraphs = [
-  "Muhammad Fayyadh is a design and development studio crafting digital experiences at the intersection of visual design and full-stack engineering. Every project is shaped by clarity, intent, and a deep respect for the people who use it.",
-  "The work spans brand identities, UI/UX systems, and web applications — always built with the same conviction: that good design should feel inevitable, and good code should feel invisible.",
-  "Open for collaborations, freelance work, and ambitious side projects. If you have something meaningful to build, let's talk.",
+  "\"Good design should feel inevitable, and good code should feel invisible.\"",
+  "My approach is rooted in simplicity. Whether it's a brand identity, a complex web application, or an interactive UI, I believe in stripping away the unnecessary until only the essential remains.",
+  "I work directly with clients to ensure the final product isn't just visually striking, but structurally sound from the ground up."
 ];
 
 export default function IntroSection() {

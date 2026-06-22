@@ -42,7 +42,7 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
       ) : (
         <>
           {/* Project header */}
-          <div className={`${isWeb ? "mb-4 min-h-[4.2rem] flex flex-col" : "mb-6 pb-4"}`}>
+          <div className={`${isWeb ? "mb-4 min-h-[4.2rem] flex flex-col border-b border-[#051A24]/10" : "mb-6 pb-4 border-b border-[#051A24]/10"}`}>
             {project.link ? (
               <a
                 href={project.link}
@@ -59,14 +59,10 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
                 {project.title}
               </h4>
             )}
-
-            <p className={`mt-1 ${isWeb ? "text-[11px] md:text-xs text-[#051A24]/50 uppercase tracking-wider min-h-[1.2rem]" : "text-xs md:text-sm text-[#051A24]/70 font-medium"}`}>
-              {(project.subtitle || project.credits) ? (project.subtitle || project.credits) : (isWeb ? "\u00A0" : null)}
-            </p>
           </div>
 
           {/* Description */}
-          <p className={`leading-relaxed ${isWeb ? "text-sm text-[#051A24]/70 max-w-xl line-clamp-3 min-h-[3.75rem]" : "text-base md:text-lg text-[#051A24]/80 max-w-2xl mb-6"}`}>
+          <p className={`leading-relaxed ${isWeb ? "text-sm text-[#051A24]/70 line-clamp-3 min-h-[3.75rem]" : "text-base md:text-lg text-[#051A24]/80 mb-6"}`}>
             {project.description || (isWeb ? "\u00A0" : "")}
           </p>
 
@@ -74,24 +70,24 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
           {hasMultipleImages ? (
             <ImageCarousel images={project.images} projectTitle={project.title} variant={variant} />
           ) : project.images?.[0]?.imageUrl ? (
-            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-[320px] md:w-[540px] aspect-[3/4]"}`}>
+            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-full aspect-[3/4]"}`}>
               <Image
                 src={project.images[0].imageUrl}
                 alt={project.images[0].altText || project.title}
                 className="object-cover rounded-xl"
                 fill
-                sizes="(max-width: 768px) 320px, 540px"
+                sizes="(max-width: 768px) 100vw, 1200px"
                 loading="lazy"
               />
             </div>
           ) : project.imageUrl ? (
-            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-[320px] md:w-[540px] aspect-[3/4]"}`}>
+            <div className={`mt-6 overflow-hidden rounded-xl ${isWeb ? "w-full aspect-video" : "w-full aspect-[3/4]"}`}>
               <Image
                 src={project.imageUrl}
                 alt={project.title}
                 className="object-cover rounded-xl"
                 fill
-                sizes="(max-width: 768px) 320px, 540px"
+                sizes="(max-width: 768px) 100vw, 1200px"
                 loading="lazy"
               />
             </div>
@@ -114,12 +110,6 @@ export default function ProjectCard({ project, index, variant = "portrait" }) {
           <h4 className="font-pp-mondwest text-xl md:text-2xl text-[#F6FCFF] text-center leading-tight mb-2">
             {project.title}
           </h4>
-
-          {project.subtitle && (
-            <p className="font-mono text-[10px] text-[#F6FCFF]/70 uppercase tracking-widest text-center mb-4">
-              {project.subtitle}
-            </p>
-          )}
 
           {project.description && (
             <p className="text-sm text-[#F6FCFF]/80 text-center leading-relaxed mb-6 line-clamp-3 max-w-[280px]">

@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 
 const CARD_WIDTH_MOBILE = 360;
-const CARD_WIDTH_DESKTOP = 560;
+const CARD_WIDTH_DESKTOP = 720;
 const STACK_PEEK = 8; // px peek offset per stacked card
 const GAP = 24;
 const WEB_CARD_ASPECT = 9 / 16; // 16:9 aspect ratio
@@ -94,13 +94,7 @@ export default function ProjectStack({ projects }) {
               }}
             >
               <div
-                className="w-full h-full rounded-xl overflow-hidden transition-shadow duration-500 ease-out group-hover/card:shadow-[0_20px_48px_rgba(5,26,36,0.18),0_8px_16px_rgba(5,26,36,0.10)]"
-                style={{
-                  boxShadow: isStacked
-                    ? "0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)"
-                    : "0 1px 6px rgba(0,0,0,0.04)",
-                  transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
-                }}
+                className="w-full h-full rounded-xl overflow-hidden"
               >
                 <ProjectCard project={project} index={i} variant="web" />
               </div>

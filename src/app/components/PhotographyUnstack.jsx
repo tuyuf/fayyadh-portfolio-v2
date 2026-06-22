@@ -23,6 +23,29 @@ const FALLBACKS = [
   "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=800&q=80",
 ];
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
 function fallbackPhotos() {
   return FALLBACKS.map((url, i) => ({
     id: `fb-${i}`,
@@ -126,9 +149,11 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
     };
   }, [width, height, photos.length]);
 
+  const isMobile = width > 0 && width < 768;
+
   /* ─── GSAP ScrollTrigger timeline ─── */
   useLayoutEffect(() => {
-    if (!containerRef.current || !grid) return;
+    if (isMobile || !containerRef.current || !grid) return;
 
     const ctx = gsap.context(() => {
       const heroImage = itemsRef.current[0];
@@ -248,6 +273,42 @@ export default function PhotographyUnstack({ photos: propPhotos }) {
   }
 
   const activePhotos = photos.slice(0, grid.count);
+
+  if (isMobile) {
+    return (
+      <motion.section 
+        className="bg-white px-6 pb-24 max-w-[600px] mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerContainer}
+      >
+        <motion.div variants={fadeUpItem} className="mb-12 border-b border-[#051A24]/20 pb-4">
+          <h2 className="font-pp-mondwest text-3xl md:text-4xl text-[#051A24] tracking-tight">
+            Photography
+          </h2>
+        </motion.div>
+        <motion.div variants={staggerContainer} className="grid grid-cols-2 gap-3 md:gap-4">
+          {photos.slice(0, 8).map((photo) => (
+            <motion.div
+              variants={fadeUpItem}
+              key={photo.id}
+              className="w-full aspect-[3/4] overflow-hidden rounded-xl bg-[#E0EBF0] relative"
+            >
+              <Image
+                src={photo.imageUrl}
+                alt={photo.caption || "Photography"}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw"
+                loading="lazy"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.section>
+    );
+  }
 
   return (
     <section ref={containerRef} className="relative h-screen bg-white">

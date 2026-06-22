@@ -42,7 +42,9 @@ export default function MetricsSection({ metrics }) {
       >
         {metrics.map((metric) => (
           <AnimatedItem key={metric.id}>
-            <MetricCard metric={metric} />
+            <div>
+              <MetricCard metric={metric} />
+            </div>
           </AnimatedItem>
         ))}
       </AnimatedContainer>

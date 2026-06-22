@@ -47,16 +47,13 @@ export default function HeroSection() {
         style={{ animationDelay: "0.4s" }}
       >
         <p>
-          I craft digital experiences that bridge design and development. From intuitive
-          interfaces to full-stack applications, every project is shaped by clarity, intent,
-          and a deep respect for the user.
+          Bridging the gap between aesthetics and engineering. I design and build digital experiences that are not only visually striking, but fundamentally human.
         </p>
         <p>
-          The studio is deliberately small. I guide the creative vision on every project,
-          moving fast without cutting corners.
+          From crafting intuitive visual systems to writing clean, scalable full-stack code, I ensure that every pixel, animation, and interaction serves a meaningful purpose. Nothing is left to chance.
         </p>
         <p>
-          Open for collaborations and freelance work.
+          Based in Semarang, collaborating globally. Currently open for new projects and freelance work.
         </p>
       </div>
 
@@ -68,11 +65,13 @@ export default function HeroSection() {
       >
         <Button
           variant="primary"
-          href="mailto:fayyadhmuhammadhabibie@gmail.com"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=fayyadhmuhammadhabibie@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Start a chat
         </Button>
-        <Button variant="secondary" href="#projects">
+        <Button variant="secondary" href="#uiux">
           View projects
         </Button>
       </div>
